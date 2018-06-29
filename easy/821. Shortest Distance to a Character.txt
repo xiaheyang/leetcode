@@ -1,0 +1,32 @@
+#1
+    vector<int> shortestToChar(string S, char C) {
+        int before=-1;
+        vector<int> result(S.size(),S.size());
+        for(int i=0;i<S.size();++i)
+        {
+            if(C==S[i])
+            {
+                for(int m=0;m<=i-before;++m)
+                {
+                    if(result[i-m]<m)
+                        break;
+                    result[i-m]=m;
+                }
+                before=i;
+            }
+            // if(i==S.size()-1)
+            // {
+            //     for(int m=1;m<=i-before;++m)
+            //     {
+            //         result[before+m]=m;
+            //     }
+            // }
+            else if(before!=-1)
+            {
+                result[i]=i-before;
+            }
+            
+        }
+        return result;
+        
+    }

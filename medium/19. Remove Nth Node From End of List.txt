@@ -1,0 +1,38 @@
+#1
+    ListNode* removeNthFromEnd(ListNode* headi, int n) {
+        ListNode *first,*second;//1.head是指向第一个节点的指针
+        ListNode head(0);
+        head.next=headi;
+        first=&head;
+        second=&head;
+        for(int i=0;i<=n;++i)
+        {
+//            if(second==NULL&&i!=n)//2.删除第一各节点
+            if(second==NULL)//4.过界判断错误
+            {
+                if(i==n-1)//5.判断边界值问题
+                {
+                    continue;
+                }
+                else
+                {
+                    return headi;                    
+                }
+            }
+            second=second->next;
+        }
+        while(second!=NULL)
+        {
+            second=second->next;
+            first=first->next;
+        }
+//        if(first!=&head)
+//        {
+        ListNode *deletep;
+        deletep=first->next;
+        first->next=deletep->next;
+        delete deletep;
+//        }
+        return head.next;//3.删掉第一个节点后，headi失效4.注意head不是指针
+    
+    }

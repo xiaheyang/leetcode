@@ -1,0 +1,22 @@
+#1
+if(head==NULL)
+            return head;
+        ListNode* p=head;
+        while(p->next!=NULL)
+        {
+            if(p->val==p->next->val)
+            {
+                if(p->next->next!=NULL)
+                    p->next=p->next->next;
+                else
+                {
+                    p->next=NULL;
+                }
+            }
+            else
+            {
+                p=p->next;
+            }
+            
+        }
+        return head;

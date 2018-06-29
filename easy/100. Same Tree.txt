@@ -1,0 +1,15 @@
+#1
+        if(p==NULL||q==NULL)//这个位置的判断
+        {
+            if(p==NULL&&q==NULL)
+                return true;
+            else
+                return false;
+        } 
+//这段可以省略        
+//        else if(p->val==q->val&&p->left==NULL&&q->left==NULL&&q->right==NULL&&q->right==NULL)
+//            return true;
+        else if(isSameTree(p->left,q->left)&&isSameTree(p->right,q->right)&&p->val==q->val)
+            return true;
+        else
+            return false;

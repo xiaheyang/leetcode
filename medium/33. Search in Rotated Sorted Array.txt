@@ -1,0 +1,61 @@
+#1
+    int searchhalf(vector<int>& nums, int target,int left,int right)
+    {
+        int center=(left+right)/2;
+        if(nums[left]==target)
+        {
+            return left;
+        }
+        if(nums[center]==target)
+        {
+            return center;
+        }
+        if(nums[right]==target)
+        {
+            return right;
+        }
+        if(right-left<3)
+        {
+            return -1;
+        }
+        if(nums[center]>nums[left]&&nums[center]>nums[right])
+        {
+            if(nums[left]<target&&nums[center]>target)
+            {
+                return searchhalf(nums,target,left+1,center-1);
+            }
+            else
+            {
+                return searchhalf(nums,target,center+1,right);
+            }
+        }
+        if(nums[center]<nums[left]&&nums[center]<nums[right])
+        {
+            if(nums[right]>target&&nums[center]<target)
+            {
+                return searchhalf(nums,target,center+1,right-1);
+            }
+            else
+            {
+                return searchhalf(nums,target,left,center-1);
+            }
+        }
+        else
+        {
+            if(nums[center]>target)
+            {
+                return searchhalf(nums,target,left,center-1);
+            }
+            else
+            {
+                return searchhalf(nums,target,center+1,right);
+            }
+        }
+    }
+    int search(vector<int>& nums, int target) {
+        if(nums.size()==0)//1.数组为空出错
+        {
+            return -1;
+        }
+        return searchhalf(nums,target,0,nums.size()-1);
+    }

@@ -1,0 +1,11 @@
+#1
+int uniquePaths(int m, int n) {
+        long long int a=1,b=1;//1.10,10³ö´í£¬³¬·¶Î§
+        int minab=min(m,n);
+        for(int i=0;i<minab-1;++i)
+        {
+            a=a*(m+n-2-i);
+            b=b*(i+1);
+        }
+        return a/b;
+    }

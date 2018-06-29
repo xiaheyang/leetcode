@@ -1,0 +1,19 @@
+#1
+        int first=0;
+        int max=0;
+        for(int i=0;i<s.size();++i)
+        {
+            for(int j =first;j<i;j++)
+            {
+                if(s[i]==s[j])
+                {
+                    if(max<i-first)//1.忘记比较大小
+                        max=i-first;
+                    first=j+1;//3.边界值设置错误
+                    break;
+                }
+            }
+            if(max<i-first+1)//2.未考虑没有重复的情况
+                max=i-first+1;
+        }
+        return max;

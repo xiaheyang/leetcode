@@ -1,0 +1,33 @@
+#1
+        sort(nums.begin(),nums.end());
+        int max=nums[0]+nums[1]+nums[2];
+        for(int i=0;i<nums.size()-2;++i)
+        {
+            int start=i+1;
+            int end=nums.size()-1;
+            while(start!=end)//1.忘记循环
+            {
+                int result=nums[start]+nums[end]+nums[i];
+                if(result>target)
+                {
+                    if(result-target<abs(max-target))//2.max为3数之和
+                    {
+                        max=result;
+                    }
+                    --end;
+                }
+                else if(result<target)
+                {
+                    if(target-result<abs(max-target))
+                    {
+                        max=result;
+                    }
+                    ++start;
+                }
+                else
+                {
+                    return target;
+                }
+            }
+        }
+        return max;

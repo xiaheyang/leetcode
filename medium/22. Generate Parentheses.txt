@@ -1,0 +1,56 @@
+#1
+    vector<string> generateParenthesis(int n) {
+/*
+fn= fn-1+()
+    ()+fn-1
+    (+fn-1+)
+错误情况(())(())
+
+        vector<string> returnresult;
+        if(n==0)
+        {
+            return returnresult; 
+        }
+        returnresult.push_back("()");
+        for(int i=1;i<n;++i)
+        {
+            int beforelen=returnresult.size();
+            for(int j=0;j<beforelen;++j)
+            {
+                string firstresult="("+returnresult[j]+")";
+                string secondresult="()"+returnresult[j];                
+                string thirdresult=returnresult[j]+"()";
+                if(thirdresult[0]!='('||thirdresult[1]!=')')
+                {
+                    returnresult.push_back(thirdresult);//1.应考虑两遍都有()，减掉重合的部分
+                }
+                returnresult.push_back(firstresult);
+                returnresult.push_back(secondresult);    
+            }
+            returnresult.erase(returnresult.begin(),returnresult.begin()+beforelen);
+        }
+        return returnresult;
+*/
+/*https://blog.csdn.net/fly_yr/article/details/48754087*///二叉树实现方式get
+        vector<string> result;
+        string res="";
+        deftree(result,res,n,n);
+        return result;
+    }
+    void deftree(vector<string> &str,string result,int left,int right)
+    {
+        if(left==0&&right==0)
+        {
+            str.push_back(result);
+        }
+        if(left>0)
+        {
+//            result=result+"(";
+            deftree(str,result+"(",left-1,right);
+        }
+        if(right>0&&left<right)
+        {
+//            result=result+")";//1.当运行到这时result已经+(
+            deftree(str,result+")",left,right-1);
+        }
+    }

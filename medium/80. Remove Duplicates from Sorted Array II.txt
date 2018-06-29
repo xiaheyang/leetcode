@@ -1,0 +1,26 @@
+#1
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.empty())
+        {
+            return 0;
+        }
+        int first=0;
+        int second=1;
+        while(second<nums.size())
+        {
+            // while(nums[second]==nums[first]&&first-1>=0&&nums[first]==nums[first-1])
+            // {
+            //     ++second;
+            // }
+            // if(second==nums.size())//1.[0,0,0,0,0,0]出错
+            //     return first;
+            ++first;
+            swap(nums[second],nums[first]);
+            ++second;
+            while(second<nums.size()&&nums[second]==nums[first]&&first-1>=0&&nums[first]==nums[first-1])//2.这里溢出
+            {
+                ++second;
+            }
+        }
+        return first+1;
+    }

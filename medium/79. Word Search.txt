@@ -1,0 +1,50 @@
+    bool existhalf(vector<vector<char>>& board, string word,int pos,int i,int j,vector<vector<int>>& boardnum)
+    {
+        if(pos==word.size()-1)
+            return true;
+        boardnum[i][j]=1;
+        if(i+1<board.size()&&boardnum[i+1][j]==0&&board[i+1][j]==word[pos+1])
+        {
+//            return existhalf(board,word,pos+1,i+1,j,boardnum);//4.返回值的问题
+            if(existhalf(board,word,pos+1,i+1,j,boardnum)) return true;
+        }
+        if(i-1>=0&&boardnum[i-1][j]==0&&board[i-1][j]==word[pos+1])//3.可以为0
+        {
+//            return existhalf(board,word,pos+1,i-1,j,boardnum);
+            if(existhalf(board,word,pos+1,i-1,j,boardnum)) return true;
+        }
+        if(j+1<board[0].size()&&boardnum[i][j+1]==0&&board[i][j+1]==word[pos+1])
+        {
+//            return existhalf(board,word,pos+1,i,j+1,boardnum);
+            if(existhalf(board,word,pos+1,i,j+1,boardnum)) return true;
+        }
+        if(j-1>=0&&boardnum[i][j-1]==0&&board[i][j-1]==word[pos+1])//2.这忘记改了
+        {
+//            return existhalf(board,word,pos+1,i,j-1,boardnum);
+            if(existhalf(board,word,pos+1,i,j-1,boardnum)) return true;
+        }
+        boardnum[i][j]=0;//5.初始化0的问题
+        return false;
+        
+        
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        if(word=="") return true;
+        if(board.empty()||board[0].empty()) return false;
+        vector<vector<int> > num(board.size(),vector<int>(board[0].size(),0));
+        for(int i=0;i<board.size();++i)
+        {
+            for(int j=0;j<board[0].size();++j)
+            {
+//                vector<vector<int> > num(board.size(),vector<int>(board[0].size(),0));
+                if(board[i][j]==word[0])
+                {
+                    if(existhalf(board,word,0,i,j,num))//1.初始值问题
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }

@@ -1,0 +1,26 @@
+#1
+void combinationSum(vector<int>& candidates, int target,int begin,vector<int>& onesult,vector<vector<int> > &returnresult) {
+        if(target==0)//1.共有结果返回出错
+        {
+            returnresult.push_back(onesult);
+            return;
+        }
+        if(target<candidates[begin])
+        {
+            return;
+        }
+        for(int i=begin;i<candidates.size();++i)
+        {
+            onesult.push_back(candidates[i]);
+            combinationSum(candidates,target-candidates[i],i,onesult,returnresult);//2.应该使用i限制重复选项
+            onesult.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int> > result;
+        vector<int> onesult;
+        sort(candidates.begin(),candidates.end());
+        combinationSum(candidates,target,0,onesult,result) ;
+        return result;
+    }

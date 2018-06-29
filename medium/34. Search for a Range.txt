@@ -1,0 +1,49 @@
+#1
+void searchRangehalf(vector<int>& nums,vector<int>& returnreslut, int target,int left,int right)
+    {
+        if(left>right)
+        {
+            return;
+        }
+        int center=(left+right)/2;
+        if(nums[center]>target)
+        {
+            searchRangehalf(nums,returnreslut,target,left,center-1);
+        }
+        else if(nums[center]<target)
+        {
+            searchRangehalf(nums,returnreslut,target,center+1,right);
+        }
+        else
+        {
+            if(returnreslut[0]==-1)
+            {
+                returnreslut[0]=center;
+                returnreslut[1]=center;
+                searchRangehalf(nums,returnreslut,target,left,center-1);//1.初始化出错
+                searchRangehalf(nums,returnreslut,target,center+1,right);
+            }
+            else
+            {
+                if(center<returnreslut[0])
+                {
+                    returnreslut[0]=center;//2.应先扩展范围
+                    searchRangehalf(nums,returnreslut,target,left,center-1);
+                    
+                }
+                else  
+                {
+                    returnreslut[1]=center;
+                    searchRangehalf(nums,returnreslut,target,center+1,right);
+                    
+                }
+            }
+        }
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> returnreslut;
+        returnreslut.push_back(-1);
+        returnreslut.push_back(-1);
+        searchRangehalf(nums,returnreslut,target,0,nums.size()-1);
+        return returnreslut;
+    }

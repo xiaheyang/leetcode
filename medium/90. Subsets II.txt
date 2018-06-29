@@ -1,0 +1,34 @@
+#1
+    void subsetsWithDuphalf(vector<vector<int>> &result,vector<int>& nums,vector<int>& oneresult,int begin,int num)
+    {
+        if(num==0)
+        {
+            result.push_back(oneresult);
+            return;
+        }
+        if(begin+num>nums.size())
+        {
+            return;
+        }
+        for(int i=begin;i<nums.size();++i)
+        {
+            oneresult.push_back(nums[i]);
+            subsetsWithDuphalf(result,nums,oneresult,i+1,num-1);
+            oneresult.pop_back();
+            while(i+1<nums.size()&&nums[i]==nums[i+1])
+            {
+                ++i;
+            }
+        }
+    }
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> oneresult;
+        sort(nums.begin(),nums.end());//1.±£Ö¤ÓÐÐò
+        for(int i=0;i<=nums.size();++i)
+        {
+            subsetsWithDuphalf(result,nums,oneresult,0,i);       
+        }
+        return result;
+    }

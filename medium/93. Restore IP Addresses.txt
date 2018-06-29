@@ -1,0 +1,59 @@
+#1
+void restoreIpAddresseshalf( vector<string> &result,string &oneofresult,string s,int numip,int pos)
+    {
+        // if(s[pos]==0)\\1.出界
+        // {
+        //     return;
+        // }
+        if(3*numip<s.size()-pos||numip>s.size()-pos)
+        {
+            return;
+        }
+        if(numip==0&&pos==s.size())
+        {
+            oneofresult.pop_back();
+            result.push_back(oneofresult);
+            oneofresult.push_back('.');//2.少个点
+            return;
+        }
+        // if(s[pos]==0)//4.同样char类型//5..0.是可以的
+        // {
+        //     return;
+        // }
+        int isbreak=3;
+        for(int i=0;i<3;++i)
+        {
+            oneofresult.push_back(s[pos+i]);
+            oneofresult.push_back('.');
+            restoreIpAddresseshalf(result,oneofresult,s,numip-1,pos+i+1);
+            oneofresult.pop_back();
+            if(pos+i+1==s.size())
+            {
+                isbreak=i+1;
+                break;
+            }
+            if(i==1)
+            {
+                if(s[pos+i-1]>'2'||(s[pos+i-1]=='2'&&s[pos+i]>'5')||(s[pos+i-1]=='2'&&s[pos+i]=='5'&&s[pos+i+1]>'5'))//3.char类型
+                {
+                    ++i;
+                    isbreak=2;
+                }
+            }
+            if(i==0&&s[pos]=='0')
+            {
+                isbreak=1;
+                break;
+            }
+        }
+        for(int i=0;i<isbreak;++i)
+        {
+            oneofresult.pop_back();
+        }
+    }
+    vector<string> restoreIpAddresses(string s) {
+        vector<string> result;
+        string oneofresult="";
+        restoreIpAddresseshalf(result,oneofresult,s,4,0);
+        return result;
+    }

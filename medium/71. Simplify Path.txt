@@ -1,0 +1,44 @@
+#1
+string simplifyPath(string path) {
+        vector<string> str;
+        vector<string> result;
+        string oneofstr="";
+        string strresult="/";
+        for(int i=1;i<path.size();++i)
+        {
+            oneofstr.push_back(path[i]);
+            if(path[i]=='/')//2.会扔掉最后一个
+            {
+                str.push_back(oneofstr);
+                oneofstr="";//1.忘记清空
+            }
+            else if(i==path.size()-1)//3./.出错
+            {
+                oneofstr+="/";
+                str.push_back(oneofstr);
+            }
+        }
+        for(int i=0;i<str.size();++i)
+        {
+            if(str[i]=="../")
+            {
+                if(result.size()>0)
+                {
+                    result.pop_back();
+                }
+            }
+            else if(str[i]!="./"&&str[i]!="/")
+            {
+                result.push_back(str[i]);
+            }
+        }
+        for(int i=0;i<result.size();++i)
+        {
+            strresult+=result[i];
+        }
+        if(strresult!="/")
+        {
+            strresult.pop_back();
+        }
+        return strresult;
+    }

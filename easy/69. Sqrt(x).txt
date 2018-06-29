@@ -1,0 +1,15 @@
+#1
+        if(x==1)//边界限制
+            return 1;
+        int left=x,right=0;
+        while(left-right>1)
+        {
+            int center=(left+right)/2 ;
+            if((long long)center*center>(long long)x)//类型限制
+                left=center;
+            else if((long long)center*center<(long long)x)
+                right=center;
+            else
+                return center;
+        }
+        return right;

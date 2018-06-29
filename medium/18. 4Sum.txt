@@ -1,0 +1,68 @@
+#1
+    vector<vector<int>> threeSum(vector<int>& nums,int first,int left,int target)
+    {
+        vector<vector<int>> returnresult;
+        for(int i=first;i<left-1;)
+        {
+            int targettwo=target-nums[i];
+            int firsttwo=i+1;
+            int lefttwo=left;
+            while(firsttwo<lefttwo)
+            {
+                if(nums[firsttwo]+nums[lefttwo]==targettwo)
+                {
+                    vector<int> threeresult;
+                    threeresult.push_back(nums[firsttwo]);
+                    threeresult.push_back(nums[lefttwo]);//1.变量名错了
+                    threeresult.push_back(nums[i]);
+                    threeresult.push_back(nums[first-1]);
+                    returnresult.push_back(threeresult);
+                    ++firsttwo;
+                    while(nums[firsttwo]==nums[firsttwo-1])
+                    {
+                        ++firsttwo;
+                    }
+                }
+                else if(nums[firsttwo]+nums[lefttwo]>targettwo)
+                {
+                    --lefttwo;
+                    while(nums[lefttwo]==nums[lefttwo+1])
+                    {
+                        --lefttwo;
+                    }
+                }
+                else
+                {
+                    ++firsttwo;
+                    while(nums[firsttwo]==nums[firsttwo-1])
+                    {
+                        ++firsttwo;
+                    }
+                }
+            }
+            ++i;
+            while(nums[i]==nums[i-1])
+            {
+                ++i;
+            }
+            
+        }
+        return returnresult;
+    }
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> result;
+       
+        for(int i=0;i<(int)nums.size()-3;)//2.size()非负，当小于0时会出错
+        {
+            vector<vector<int>> threeresult;
+            threeresult=threeSum(nums,i+1,nums.size()-1,target-nums[i]);
+            result.insert(result.end(),threeresult.begin(),threeresult.end());
+            ++i;
+            while(nums[i]==nums[i-1])
+            {
+                ++i;
+            }
+        }
+        return result;
+    }

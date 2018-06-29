@@ -1,0 +1,42 @@
+#1
+ListNode* rotateRight(ListNode* head, int k) {
+        // ListNode** first=&head;
+        // ListNode * second=head;
+        // for(int i=0;i<k;++i)
+        // {
+        //     second=second->next;
+        // }
+        // while(second!=NULL)
+        // {
+        //     *first=&second;
+        //     second=second->next;
+        //     *first=(*first)->next;
+        // }
+        if(head==NULL)
+        {
+            return head;//4.为空
+        }
+        ListNode *headnode,p(0);
+        headnode=&p;
+        headnode->next=head;
+        ListNode * first=headnode;
+        ListNode * second=headnode;
+        for(int i=0;i<k;++i)
+        {
+            second=second->next;
+            if(second->next==NULL)//1.超出范围时2.[1],1出错3.未理解题意
+            {
+                k=k%(i+1)+i+1;//5.[1,2,3]20000000 出错
+                second=headnode;
+            }
+        }
+        while(second->next!=NULL)
+        {
+            second=second->next;
+            first=first->next;
+        }
+        second->next=head;
+        head=first->next;
+        first->next=NULL;
+        return head;
+    }

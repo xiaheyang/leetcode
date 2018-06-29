@@ -1,0 +1,27 @@
+#1
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+        ListNode realhead(0) ;
+        realhead.next=head;
+        ListNode* first=&realhead,*second=head;
+        int num=0;
+        while(second!=NULL)
+        {
+            ++num;
+            if(num<m)
+            {
+                first=first->next;
+                second=second->next;
+            }
+            else if(num>=n)
+            {
+                return realhead.next;
+            }
+            else
+            {
+                ListNode* p=first->next;
+                first->next=second->next;
+                second->next=first->next->next;
+                first->next->next=p;
+            }
+        }
+    }

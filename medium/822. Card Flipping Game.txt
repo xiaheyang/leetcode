@@ -1,0 +1,74 @@
+#1
+    // bool isbool(auto a,auto b)
+    // {
+    //     return a[0]>b[0];
+    // }
+        
+    int flipgame(vector<int>& fronts, vector<int>& backs) {
+        // vector<vector<int>> re;
+        // for(int i=0;i<fronts.size();++i)
+        // {
+        //     vector<int> one;
+        //     one.push_back(fronts[i]);
+        //     one.push_back(backs[i]);
+        //     re.push_back(one)£»
+        // }
+        // sort(re.begin(),re.end(),isbool);
+        // int min=-1;
+        // int pos=0;
+        // for(int i=0;i<fronts.size();++i)
+        // {
+        //     if(re[i][0]!=re[i+1][0])
+        //     {
+        //         bool resulta=true;
+        //         for(int k=pos;k<=i;++k)
+        //         {
+        //             resulta=resulta&&(re[i][0]!=re[i][1]);
+        //         }
+        //         if(resulta)
+        //         {
+        //             min=i;
+        //         }
+        //     }
+        //     // if(re[i][0]!=re[i][1]&&re[i][0]!=re[i+1][0]&&re[i][0]!=re[i-1][0])
+        //     // {
+        //     //     min=
+        //     // }
+        // }
+        map<int,bool>mp;
+        for(int i=0;i<fronts.size();++i)
+        {
+            if(fronts[i]==backs[i])
+            {
+                mp[fronts[i]]=false;
+            }
+            else
+            {
+                if(mp.count(fronts[i])==0)
+                {
+                     mp[fronts[i]]=true;
+                }
+                else
+                {
+                    mp[fronts[i]]=mp[fronts[i]]&&true;
+                }
+                if(mp.count(backs[i])==0)
+                {
+                     mp[backs[i]]=true;
+                }
+                else
+                {
+                    mp[backs[i]]=mp[backs[i]]&&true;
+                }
+            }
+        }
+        for(auto m:mp)
+        {
+            if(m.second==true)
+            {
+                return m.first;
+            }
+
+        }
+        return 0;
+    }

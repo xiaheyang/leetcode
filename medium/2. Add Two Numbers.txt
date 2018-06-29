@@ -1,0 +1,39 @@
+#1
+        ListNode * result,*p=new ListNode(0);
+        result=p;
+        int add=0;
+        for(;l1!=NULL||l2!=NULL;)
+        {
+            int l1val,l2val;
+            if(l1==NULL)
+            {
+                l1val=0;
+            }
+            else 
+            {
+                l1val=l1->val;   
+                l1=l1->next;
+            }
+            if(l2==NULL)
+            {
+                l2val=0;
+            }
+            else 
+            {
+                l2val=l2->val;
+                l2=l2->next;
+            }    
+            int val_result=l1val+l2val+add;
+            ListNode * one_exp=new ListNode(val_result%10);
+            add=val_result/10;
+            result->next=one_exp;
+            result=result->next;
+
+        }
+        if(add)//±ß½çÌõ¼þ
+        {
+            ListNode * one_exp=new ListNode(1);
+            result->next=one_exp;
+        }
+            
+        return p->next;

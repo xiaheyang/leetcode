@@ -1,0 +1,21 @@
+#1
+        if(numRows==1)
+            return s;
+        int groupNum=s.size()/(2*numRows-2);
+        if(s.size()%(2*numRows-2)!=0)
+            ++groupNum;
+        string result="";
+        for(int i=0;i<numRows;++i)
+        {
+            for(int j=0;j<groupNum;++j)//1.复制忘改循环变量+1
+            {
+                if(i+j*(2*numRows-2)<s.size())
+                    result.push_back(s[i+j*(2*numRows-2)]);//2.变量名用成常量3.常量变量混淆
+                if(i!=0&&i!=numRows-1)
+                {
+                    if(2*numRows-2-i+j*(2*numRows-2)<s.size())
+                        result.push_back(s[2*numRows-2-i+j*(2*numRows-2)]);
+                }
+            }
+        }
+        return result;

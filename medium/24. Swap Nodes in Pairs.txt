@@ -1,0 +1,38 @@
+#1
+    ListNode* swapPairs(ListNode* ihead) {
+        if(ihead==NULL)//1.检验空置
+        {
+            return ihead;
+        }
+        ListNode headpoit(0);
+        ListNode *head=&headpoit;
+        ListNode *resulthead=&headpoit;//5.保留头指针
+        head->next=ihead;//4.指针赋值
+        // while(head!=NULL)//2.本身不为空3.连接时尾部衔接出问题
+        // {
+        //     ListNode* q=head->next;
+        //     head->next=q->next;
+        //     q->next=head;
+        //     head=head->next;
+        // }
+        // while(head->next!=NULL)//6.会遗失第二个元素
+        // {
+        //     head=head->next;
+        //     ListNode* q=head->next;
+        //     head->next=q->next;
+        //     q->next=head;
+        // }
+        while(head->next!=NULL)
+        {
+            ListNode* q=head->next;
+            if(q->next==NULL)//7.考虑奇数情况
+            {
+                break;
+            }
+            head->next=q->next;
+            q->next=q->next->next;
+            head->next->next=q;
+            head=q;
+        }
+        return resulthead->next;
+    }

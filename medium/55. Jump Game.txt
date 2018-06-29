@@ -1,0 +1,22 @@
+#1
+bool canJumppos(vector<int>& nums,int pos)//1.超时
+    {
+        if(pos==0)
+        {
+            return true;
+        }
+        bool resule=false;
+        for(int i=pos-1;i>=0;--i)
+        {
+            if(nums[i]>=pos-i)
+            {
+                resule=resule||canJumppos(nums,i);
+                break;//只要有一个就可以
+            }
+        }
+        return resule;
+    }
+    
+    bool canJump(vector<int>& nums) {
+        return canJumppos(nums,nums.size()-1);
+    }

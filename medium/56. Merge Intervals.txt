@@ -1,0 +1,26 @@
+#1
+vector<Interval> merge(vector<Interval>& intervals) {
+        vector<Interval> result;
+        map<int,Interval> mapresult;
+        for(auto mem:intervals)
+        {
+            if(mapresult.count(mem.start)==0||mapresult[mem.start].end<mem.end)
+            {
+                mapresult[mem.start]=mem;
+            }
+        }
+        map<int,Interval>::iterator iter=mapresult.begin();
+        while(iter!=mapresult.end())
+        {
+            int first=iter->first;
+            int end=iter->second.end;
+            for(map<int,Interval>::iterator ite=++iter;ite->first<=end&&iter!=mapresult.end();++ite,++iter)//1.最后一位出错2.(1,4)(4,5)出错
+            {
+                end=max(end,ite->second.end);
+            }
+            Interval res(first,end);
+            result.push_back(res);
+        }
+        return result;
+        
+    }

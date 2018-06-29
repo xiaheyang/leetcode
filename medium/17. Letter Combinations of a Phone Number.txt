@@ -1,0 +1,38 @@
+#1
+    void lettersingle(vector<string>& str,char num)
+    {
+        string strNum[] ={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};//1.[]位置出错
+        int target=num-'2';
+        int beforelen=str.size();
+        for(int i=0;i<strNum[target].size();++i)//2.变量名错误
+        {
+            if(beforelen==0)//4.未考虑第一遍
+            {
+
+                string nowstr;
+                nowstr.push_back(strNum[target][i]);//3.赋值错误
+                str.push_back(nowstr);
+            }
+            else
+            {
+                for(int j=0;j<beforelen;++j)
+                {
+                    string nowstr(str[j]);
+                    nowstr.push_back(strNum[target][i]);
+                    str.push_back(nowstr);
+                }
+            }
+        }
+        if(beforelen!=0)//5.第一遍这也会出问题
+		{
+			str.erase(str.begin(),str.begin()+beforelen);//6.erase左闭右开
+		}
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string>  strResult;
+        for(int i=0;i<digits.size();++i)
+        {
+            lettersingle(strResult,digits[i]);
+        }
+        return strResult;
+    }

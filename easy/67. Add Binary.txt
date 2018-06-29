@@ -1,0 +1,74 @@
+#1
+        if(a.size()<b.size())
+            swap(a,b);
+        bool is_add=false;
+        int i;
+        for(i=1;i<=b.size();++i)
+        {
+            if(b[b.size()-i]==a[a.size()-i]&&a[a.size()-i]=='0')
+            {
+                if(is_add)
+                {
+                    a[a.size()-i]='1';
+                    is_add=false;
+                }                    
+                else
+                {
+                    a[a.size()-i]='0';  
+                }
+            }
+            else if(b[b.size()-i]==a[a.size()-i]&&a[a.size()-i]=='1')
+            {
+                if(is_add)
+                {
+                    a[a.size()-i]='1';
+                }
+                else
+                {
+                    a[a.size()-i]='0';  
+                    is_add=true;
+                }  
+                if(i==a.size())
+                    {
+                        a.insert(a.begin(),'1');
+                        return a;
+                    }
+            }
+            else
+            {
+                if(is_add)
+                {
+                    a[a.size()-i]='0';
+                    if(i==a.size())
+                    {
+                        a.insert(a.begin(),'1');
+                        return a;
+                    }
+                }
+                else
+                {
+                    a[a.size()-i]='1';  
+                }
+            }                
+        }
+        for(;i<=a.size();++i)
+        {
+            if(is_add)
+            {
+                if(a[a.size()-i]=='1')
+                {
+                    a[a.size()-i]='0';
+                    if(i==a.size())
+                    {
+                        a.insert(a.begin(),'1');
+                        return a;
+                    }
+                }  
+                else if(a[a.size()-i]=='0')
+                {
+                    a[a.size()-i]='1';
+                    is_add=false;
+                }
+            }
+        }
+        return a;

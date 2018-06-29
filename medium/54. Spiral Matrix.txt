@@ -1,0 +1,51 @@
+#1
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> result;
+        if(matrix.empty())//4.为空
+        {
+            return result;
+        }
+        int lenx=matrix[0].size();
+        int leny=matrix.size();
+        int startpos=0;
+        while(lenx-1-2*startpos>=0&&leny-1-2*startpos>=0)//2.临界=3.最后一个/一行
+        {
+            for(int i=startpos;i<lenx-1-startpos;++i)
+            {
+                result.push_back(matrix[startpos][i]);
+            }
+            if(leny-1-2*startpos==0)
+            {
+                result.push_back(matrix[startpos][lenx-1-startpos]);
+                break;
+            }
+            for(int i=startpos;i<leny-1-startpos;++i)
+            {
+                result.push_back(matrix[i][lenx-1-startpos]);
+            }
+            if(lenx-1-2*startpos==0)
+            {
+                result.push_back(matrix[leny-1-startpos][lenx-1-startpos]);
+                break;
+            }
+            //4.(2,3)出错
+            // if(lenx-1-2*startpos==0||leny-1-2*startpos==0)
+            // {
+            //     if(lenx-1-2*startpos==0&&leny-1-2*startpos==0)
+            //     {
+            //         result.push_back(matrix[startpos][startpos]);
+            //     }
+            //     break;
+            // }
+            for(int i=lenx-1-startpos;i>startpos;--i)
+            {
+                result.push_back(matrix[leny-1-startpos][i]);
+            }
+            for(int i=leny-1-startpos;i>startpos;--i)
+            {
+                result.push_back(matrix[i][startpos]);
+            }
+            ++startpos;//1.忘记循环
+        }
+        return result;
+    }

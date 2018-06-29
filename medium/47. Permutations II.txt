@@ -1,0 +1,71 @@
+#1
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int> > result;
+        sort(nums.begin(),nums.end());
+        result.push_back(nums);
+        int len=1;
+        for(int i=1;i<=nums.size();++i)
+        {
+            len=len*i;
+        }
+        for(int i=1;i<len;++i)//1.最后会有重复
+        {
+            vector<int> oneresult;
+            oneresult=result[i-1];
+            int small=nums.size()-1;
+            while(oneresult[small]<=oneresult[small-1])//2.少=
+            {
+                --small;
+                if(small==0)//2.只跳了一次
+                {
+                    break;                    
+                }
+
+            }
+            if(small==0)
+            {
+                break;                    
+            }
+            int pos=small;
+            for(int chan=small+1;chan<nums.size();++chan)
+            {
+                pos=chan;
+                if(oneresult[chan]<=oneresult[small-1])
+                {
+                    pos=chan-1;
+                    break;
+                }
+            }
+            oneresult[small-1]=oneresult[small-1]+oneresult[pos];
+            oneresult[pos]=oneresult[small-1]-oneresult[pos];
+            oneresult[small-1]=oneresult[small-1]-oneresult[pos];
+            reverse(oneresult.begin()+small,oneresult.end());
+            result.push_back(oneresult);
+        }
+        return result;
+    }
+#2
+void per(vector<int>& nums,int begin ,vector<vector<int> >  &res)
+    {
+        if(begin==nums.size())//2.-1的话不会执行换最后一个元素
+        {
+            res.push_back(nums);
+            return;
+        }
+        for(int i=begin;i<nums.size();++i)
+        {
+            swap(nums[i],nums[begin]); 
+            per(nums,i+1,res);
+            swap(nums[i],nums[begin]); //0.换回保序
+            while(i<nums.size()-1&&nums[i+1]==nums[begin])//1.判断位置
+            {
+               ++i;
+            }
+        }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int> > res;
+        per(nums,0,res);
+        return res;
+    }

@@ -1,0 +1,55 @@
+#1
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i=0;i<9;++i)
+        {
+            vector <int> cout(10,0);
+            for(int j=0;j<9;++j)
+            {
+                if(board[i][j]!='.')
+                {
+                    ++cout[board[i][j]-'1'];
+                    if(cout[board[i][j]-'1']>1)
+                    {
+                        return false;
+                    }
+                }               
+            }
+        }
+        for(int i=0;i<9;++i)
+        {
+            vector <int> cout(10,0);
+            for(int j=0;j<9;++j)
+            {
+                if(board[j][i]!='.')
+                {
+                    ++cout[board[j][i]-'1'];
+                    if(cout[board[j][i]-'1']>1)
+                    {
+                        return false;
+                    }
+                }               
+            }
+        }
+        for(int i=0;i<9;++i)
+        {
+            int irow=i/3;
+            int icol=i%3;
+            vector <int> cout(10,0);
+            for(int j=0;j<9;++j)
+            {
+                int jrow=j/3;
+                int jcol=j%3;
+                if(board[3*irow+jrow][3*icol+jcol]!='.')
+                {
+                    ++cout[board[3*irow+jrow][3*icol+jcol]-'1'];
+                    if(cout[board[3*irow+jrow][3*icol+jcol]-'1']>1)
+                    {
+                        return false;
+                    }
+                }               
+            }
+        }
+        return true;
+        
+        
+    }

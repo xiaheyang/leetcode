@@ -1,0 +1,219 @@
+#1
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();)
+        {
+            int target=-nums[i];
+            int begin=i+1;
+            int end=nums.size()-1;
+            while(begin<end)
+            {
+                if(nums[begin]+nums[end]==target)
+                {
+                    vector<int> star;
+                    star.push_back(nums[begin]);
+                    star.push_back(nums[end]);
+                    star.push_back(-target);
+                    result.push_back(star);
+                    ++begin;
+                    while(nums[begin]==nums[begin-1])
+                    {
+                        ++begin;
+                    }
+                }
+                else if(nums[begin]+nums[end]<target)
+                { 
+                    ++begin;
+                    while(nums[begin]==nums[begin-1])
+                    {
+                        ++begin;
+                    }
+                }
+                else
+                { 
+                    --end;
+                    while(nums[end]==nums[end+1])
+                    {
+                        --end;
+                    }
+                }
+
+            }
+            ++i;//1.未考虑初始重值的问题
+            while(nums[i]==nums[i-1])
+            {
+                ++i;
+            }
+            
+        }
+        return result;
+        
+/*1.复杂度过高311/313
+        vector<int> plus;
+        vector<int> plus_double;
+        vector<int> minus;
+        vector<int> minus_double;
+        vector<int> zero;
+        vector<vector<int>> result;
+        for(int i=0;i<nums.size();++i)
+        {
+            if(nums[i]>0)
+            {
+                int issingle=0;
+                for(int h=0;h<plus.size();++h)
+                {
+                    if(nums[i]==plus[h])
+                    {  
+                        issingle=1;
+                        for(int l=0;l<plus_double.size();++l)
+                        {
+                            if(nums[i]==plus_double[l])
+                            {
+                                issingle=2;
+                            }
+                        }
+                        
+                    }
+
+                } 
+                if(issingle==0)
+                {
+                    plus.push_back(nums[i]);                    
+                }
+                if(issingle==1)
+                {
+                    plus_double.push_back(nums[i]);
+                }
+            }
+            else if(nums[i]<0)
+            {
+                int issingle=0;
+                for(int h=0;h<minus.size();++h)
+                {
+                    if(nums[i]==minus[h])
+                    { 
+                        issingle=1;
+                        for(int l=0;l<minus_double.size();++l)
+                        {
+                            if(nums[i]==minus_double[l])
+                            {
+                                issingle=2;
+                            }
+                        }
+
+                    }
+
+                }
+                if(issingle==0)
+                {
+                    minus.push_back(nums[i]);                    
+                }
+                if(issingle==1)
+                {
+                    minus_double.push_back(nums[i]);
+                }
+
+            }
+            else 
+            {
+                zero.push_back(nums[i]);
+            }
+        }
+        if(zero.size()>0)
+        {
+            if(zero.size()>=3)
+            {
+                vector<int> star;
+                star.push_back(0);
+                star.push_back(0);
+                star.push_back(0);
+                result.push_back(star);
+            }
+            for(int i=0;i<plus.size();++i)
+            {
+                for(int k=0;k<minus.size();++k)
+                {
+                    if(plus[i]+minus[k]==0)
+                    {
+                        vector<int> star;
+                        star.push_back(plus[i]);
+                        star.push_back(0);
+                        star.push_back(minus[k]);
+                        result.push_back(star);
+                        break;
+                    }
+                }
+            }
+                
+        }
+        for(int i=0;i<plus_double.size();++i)
+        {
+            for(int k=0;k<minus.size();++k)
+            {
+                if(plus_double[i]*2+minus[k]==0)
+                {
+                    vector<int> star;
+                    star.push_back(plus_double[i]);
+                    star.push_back(plus_double[i]);
+                    star.push_back(minus[k]);
+                    result.push_back(star);
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<minus_double.size();++i)
+        {
+            for(int k=0;k<plus.size();++k)
+            {
+                if(minus_double[i]*2+plus[k]==0)
+                {
+                    vector<int> star;
+                    star.push_back(minus_double[i]);
+                    star.push_back(minus_double[i]);
+                    star.push_back(plus[k]);
+                    result.push_back(star);
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<plus.size();++i)
+        {
+            for(int j=i+1;j<plus.size();++j)
+            {
+                for(int k=0;k<minus.size();++k)
+                {
+                    if(plus[i]+plus[j]+minus[k]==0)
+                    {
+                        vector<int> star;
+                        star.push_back(plus[i]);
+                        star.push_back(plus[j]);
+                        star.push_back(minus[k]);
+                        result.push_back(star);
+                        break;
+                    }
+                }
+            }
+                
+        }
+        for(int i=0;i<minus.size();++i)
+        {
+            for(int j=i+1;j<minus.size();++j)
+            {
+                for(int k=0;k<plus.size();++k)
+                {
+                    if(minus[i]+minus[j]+plus[k]==0)
+                    {
+                        vector<int> star;
+                        star.push_back(minus[i]);
+                        star.push_back(minus[j]);
+                        star.push_back(plus[k]);
+                        result.push_back(star);
+                        break;
+                    }
+                }
+            }     
+        }
+        return result;
+*/            
+    }

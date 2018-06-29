@@ -1,0 +1,24 @@
+#1
+    void result(vector<vector<int>> &res,vector<int> &one,int pos,int num)
+    {
+//        one.push_back(pos);//3.不能在这压入
+        if(num==0)//5.1的话不会进入下面的循环
+        {
+//            one.push_back(pos);//1.下面忘记压入了
+//            one.push_back(pos);
+            res.push_back(one);
+            return;
+        }
+        for(int i=pos;i>=num;--i)//2.边界条件
+        {
+            one.push_back(i);
+            result(res,one,i-1,num-1);//4.这里忘改了
+            one.pop_back();
+        }
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> re;
+        vector<int> one;
+        result(re,one,n,k);
+        return re;        
+    }

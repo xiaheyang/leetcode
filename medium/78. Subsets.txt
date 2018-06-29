@@ -1,0 +1,17 @@
+#1
+vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> oneofresult;
+        result.push_back(oneofresult);
+        for(int i=0;i<nums.size();++i)
+        {
+            int count=result.size();
+            for(int j=0;j<count;++j)
+            {
+                oneofresult=result[j];
+                oneofresult.push_back(nums[i]);
+                result.push_back(oneofresult);
+            }
+        }
+        return result;
+    }

@@ -1,0 +1,56 @@
+#1
+    ListNode* partition(ListNode* head, int x) {
+        // // if(head==NULL)//1.非空判断
+        // //     return head;
+        // ListNode headnodefir(0),headnodesec(0),*first,*second;
+        // headnodefir.next=head;
+        // headnodesec.next=head;//4.第一个如果交换，first与second地址相互影响
+        // first=&headnodefir;
+        // second=&headnodesec;
+        // while(second!=NULL&&second->next!=NULL)//2.当最后一个是需要换时会跳过第二个条件
+        // {
+        //     if(second->next->val<x)
+        //     {
+        //         ListNode *p=second->next;
+        //         second->next=second->next->next;
+        //         p->next=first->next;
+        //         first->next=p;
+        //         first=p;
+        //     }
+        //     else //3.会跳过连续的
+        //     {
+        //         second=second->next;
+        //     }
+        // }
+        // return headnodefir.next;
+        ListNode headnode(0),*first,*second;
+        headnode.next=head;
+        first=&headnode;
+        second=first;
+        while(second!=NULL&&second->next!=NULL)
+        {
+            //if(second->next->val<x&&second!=first)//5.first少加1
+            if(second->next->val<x)
+            {
+                if(second==first)
+                {
+                    second=second->next;
+                    first=first->next;
+                }
+                else
+                {
+                    ListNode *p=second->next;
+                    second->next=second->next->next;
+                    p->next=first->next;
+                    first->next=p;
+                    first=p;
+                }
+            }
+            else
+            {
+                second=second->next;
+            }
+        }
+        return headnode.next;
+        
+    }

@@ -1,0 +1,32 @@
+#1
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode first(0),*fir,*second;
+        fir=&first;
+        fir->next=head;
+        second=head;
+        while(second!=NULL)
+        {
+            // while(second->next!=NULL&&second->val==second->next->val)
+            // {
+            //     second=second->next;
+            // }
+            // fir->next=second;
+            // fir=fir->next;
+            // second=second->next;
+            if(second->next==NULL||second->val!=second->next->val)
+            {
+                second=second->next;
+                fir=fir->next;
+            }
+            else
+            {
+                while(second->next!=NULL&&second->val==second->next->val)//1.╥г©уеп╤о
+                {
+                    second=second->next;
+                }
+                second=second->next;
+                fir->next=second;
+            }
+        }
+        return first.next;
+    }

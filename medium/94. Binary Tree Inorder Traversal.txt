@@ -1,0 +1,36 @@
+#1
+//     void mid(vector<int> &result,TreeNode* one)
+//     {
+//         if(one==NULL)
+//         {
+//             return;
+//         }
+//         mid(result,one->left);
+//         result.push_back(one->val);
+//         mid(result,one->right);
+        
+//     }
+    
+//     vector<int> inorderTraversal(TreeNode* root) {
+//         vector<int> result;
+//         mid(result,root);
+//         return result;
+//     }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*> st;
+        TreeNode* cul=root;
+        while(!st.empty()||cul!=NULL)
+        {
+            while(cul!=NULL)
+            {
+                st.push_back(cul);
+                cul=cul->left;
+            }
+            cul=st.top();
+            st.pop_back();
+            result.push_back(cul->val);
+            cul=cul->right;
+        }
+        return result;
+    }

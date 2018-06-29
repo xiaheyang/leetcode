@@ -1,0 +1,46 @@
+#1
+        int len=str.size();
+        int numzero=1;
+        bool isNum=false;
+        long long int result=0;
+        for(int i=0;i<len;++i)
+        {
+            if(str[i]!=' '&&!isNum)
+            {
+
+                isNum=true;
+                if(str[i]=='-'||str[i]=='+')
+                {
+                    if(str[i]=='-')
+                        numzero=-1;
+                    ++i;
+                }
+                    
+            }
+            if(isNum)
+            {
+                
+                switch(str[i])
+                {
+                    case '0':result=result*10;break;//1.忘记赋值
+                    case '1':result=result*10+1;break;
+                    case '2':result=result*10+2;break;
+                    case '3':result=result*10+3;break;
+                    case '4':result=result*10+4;break;
+                    case '5':result=result*10+5;break;
+                    case '6':result=result*10+6;break;
+                    case '7':result=result*10+7;break;
+                    case '8':result=result*10+8;break;
+                    case '9':result=result*10+9;break;
+                    default:
+                        return (int)numzero*result;//2.不同值类型的转换
+                }
+                if(numzero==1&&result>(long long)INT_MAX)
+                    return INT_MAX;
+                else if(numzero==-1&&result>(long long)INT_MAX+1)
+                    return INT_MIN;
+                
+            }
+                
+        }
+        return (int)numzero*result ;

@@ -1,0 +1,51 @@
+#1
+void setZeroes(vector<vector<int>>& matrix) {
+        if(matrix.empty())//1.数组为空
+        {
+            return;
+        }
+        int row=matrix.size();
+        int col=matrix[0].size();
+        vector<bool> ifcolzero(col,false);
+        for(int i=0;i<row;++i)
+        {
+            bool ifrowzero=false;
+            // int pos=0,colpos=0;
+            for(int j=0;j<col;++j)
+            {
+                if(matrix[i][j]==0)
+                {
+                    if(!ifcolzero[j])
+                    {
+                        for(int m=0;m<i;++m)
+                        {
+                            matrix[m][j]=0;
+                        }
+                    }
+                    ifcolzero[j]=true;
+                    if(!ifrowzero)
+                    {
+                        for(int m=0;m<j;++m)
+                        {
+                            matrix[i][m]=0;
+                        }
+                    }
+                    ifrowzero=true;
+                }
+                if(ifcolzero[j]||ifrowzero)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+            // for(int k=0;k<colpos;++k)//2.未考虑上部分3.pos并不是当前定位
+            // {
+            //      matrix[k][pos]=0;
+            // }
+            // for(int j=0;j<pos;++j)
+            // {
+            //     matrix[i][j]=0;
+            // }
+            
+        }
+        return;
+    }

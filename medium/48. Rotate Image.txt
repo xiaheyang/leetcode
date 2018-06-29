@@ -1,0 +1,23 @@
+#1
+void rotate(vector<vector<int>>& matrix) {
+        int len=matrix.size();
+        for(int i =0;i<(len+1)/2;++i)
+        {
+            for(int j=0;j<len/2;++j)//2.+1含中位数3.开始位置问题4.填充方式
+            {
+                int befor=matrix[i][j];
+                int ix=i,iy=j;
+                for(int m=0;m<4;++m)
+                {
+                    int now=matrix[iy][len-1-ix];
+                    matrix[iy][len-1-ix]=befor;
+                    befor=now;
+                    int iix=iy;
+                    int iiy=len-1-ix;
+                    ix=iix;//1.赋值顺序问题
+                    iy=iiy; 
+                }
+            }
+        }
+        return;
+    }
